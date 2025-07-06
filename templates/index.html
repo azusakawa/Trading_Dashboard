@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="title">Real-Time Trading Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 data-translate="dashboard_title">Trading Dashboard</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#forex-section"><i class="fas fa-dollar-sign"></i> <span data-translate="forex_category_title">Forex</span></a></li>
+                    <li><a href="#futures-section"><i class="fas fa-file-contract"></i> <span data-translate="futures_category_title">Futures</span></a></li>
+                    <li><a href="#contact-section"><i class="fas fa-envelope"></i> <span data-translate="contact_title">Contact</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-controls">
+                <div class="theme-switcher">
+                    <button id="theme-toggle-btn" data-translate="toggle_theme">Toggle Theme</button>
+                </div>
+                <div class="language-switcher">
+                    <button id="lang-en-btn">EN</button>
+                    <span>/</span>
+                    <button id="lang-tw-btn">繁體</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search Symbol..." data-translate-placeholder="search_placeholder">
+                </div>
+                <div id="current-time" class="current-time" data-translate="current_time_label">Current Time: </div>
+            </header>
+
+            <main class="content-area">
+                <section id="forex-section" class="content-section category-section">
+                    <h2 data-translate="forex_category_title">Forex</h2>
+                    <div id="forex-subcategories-container">
+                        <!-- Forex sub-category tables will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <section id="futures-section" class="content-section category-section">
+                    <h2 data-translate="futures_category_title">Futures</h2>
+                    <div class="table-responsive-wrapper">
+                        <table class="prediction-table">
+                            <thead>
+                                <tr>
+                                    <th data-translate="header_symbol">Symbol</th>
+                                    <th data-translate="header_latest_close">Latest Close</th>
+                                    <th data-translate="header_bband_advice">BBand Advice</th>
+                                    <th data-translate="header_bband_stop_loss">BBand Stop Loss</th>
+                                    <th data-translate="header_rsi">RSI</th>
+                                    <th data-translate="header_macd">MACD</th>
+                                    <th data-translate="header_ema">EMA</th>
+                                    <th data-translate="header_cci">CCI</th>
+                                    <th data-translate="header_adx">ADX</th>
+                                    <th data-translate="header_stoch_k">Stoch %K</th>
+                                    <th data-translate="header_atr">ATR</th>
+                                    <th data-translate="header_bbw">BBW</th>
+                                </tr>
+                            </thead>
+                            <tbody id="futures-table-body">
+                                <!-- Futures data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="main-footer">
+                <div id="contact-section" class="contact-details">
+                    <h2 data-translate="contact_title">Contact Us</h2>
+                    <a href="mailto:@gmail.com" data-translate="contact_email">Email: @gmail.com</a>
+                    <a href="https://www.instagram.com/" target="_blank" data-translate="contact_instagram">Instagram: @</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Floating Chart Window -->
+    <div id="chart-modal" class="chart-modal" style="display: none;">
+        <div class="chart-modal-content">
+            <button id="close-chart-btn" class="close-button">&times;</button>
+            <div id="chart-container" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='socket.io.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
